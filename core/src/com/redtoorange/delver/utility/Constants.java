@@ -3,7 +3,7 @@ package com.redtoorange.delver.utility;
 import com.badlogic.gdx.graphics.Color;
 
 public class Constants {
-    public static final String TITLE = "Pokemon";
+    public static final String TITLE = "GB-Roguelike";
     public static final int WIDTH = 1920;
     public static final int HEIGHT = 1080;
 

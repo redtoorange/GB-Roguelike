@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.redtoorange.delver.MainGame;
+import com.redtoorange.delver.utility.Constants;
 
 public class StartScreen extends GameScreen {
     private MainGame game;
@@ -26,6 +27,8 @@ public class StartScreen extends GameScreen {
 
         rootTable = new Table(skin);
         stage.addActor( rootTable );
+
+        rootTable.setSize( Constants.GB_RES_WIDTH, Constants.GB_RES_HEIGHT );
 
         rootTable.debug();
 
@@ -58,24 +61,15 @@ public class StartScreen extends GameScreen {
             stage.setViewport(playingScreen.getViewport());
         }
 
-
-
-        Gdx.input.setInputProcessor(stage);
-
-        float x = stage.getCamera().position.x;
-        float y = stage.getCamera().position.y;
-
-        rootTable.setPosition(x, y);
-
-        //realignMainTable();
+        realignMainTable();
     }
 
     private void realignMainTable() {
         Gdx.input.setInputProcessor(stage);
 
         rootTable.setPosition(
-                stage.getCamera().position.x,
-                stage.getCamera().position.y
+                stage.getCamera().position.x - rootTable.getWidth()/2,
+                stage.getCamera().position.y - rootTable.getHeight()/2
         );
     }
 
