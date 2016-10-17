@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -37,7 +38,6 @@ public class PlayingScreen extends GameScreen {
 
 	public PlayingScreen(MainGame game){
 		this.game = game;
-
 		camera = new OrthographicCamera();
 		viewport = new FitViewport( Constants.GB_RES_WIDTH, Constants.GB_RES_HEIGHT, camera);
 		initUI( );
@@ -46,7 +46,11 @@ public class PlayingScreen extends GameScreen {
 
 	protected void initUI() {
 		super.initUI();
-		stage.setViewport( viewport );
+		//Added for Scene2D.ui
+		stage = new Stage( viewport );
+
+		//THIS WILL NOT WORK!!!! Why?
+		//stage.setViewport( viewport );
 
 		Label hpLabel = new Label( "HP:", skin, "default" );
 		hpCount = new Label( "20", skin, "default" );
@@ -73,9 +77,11 @@ public class PlayingScreen extends GameScreen {
 	public void show() {
 		if(!initialized){
 			initialized = true;
-
 			loadMap( );
 		}
+		else if(loaded)
+			reset();
+
 
 		//Stage has to be the input processor to handle input from the mouse and such
 		Gdx.input.setInputProcessor(stage);

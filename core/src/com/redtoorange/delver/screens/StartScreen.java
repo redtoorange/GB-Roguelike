@@ -25,7 +25,6 @@ public class StartScreen extends GameScreen {
         super.initUI();
 
         rootTable = new Table(skin);
-        //rootTable.setSize( Constants.GB_RES_WIDTH, Constants.GB_RES_HEIGHT );
         stage.addActor( rootTable );
 
         rootTable.debug();
@@ -59,7 +58,16 @@ public class StartScreen extends GameScreen {
             stage.setViewport(playingScreen.getViewport());
         }
 
-        realignMainTable();
+
+
+        Gdx.input.setInputProcessor(stage);
+
+        float x = stage.getCamera().position.x;
+        float y = stage.getCamera().position.y;
+
+        rootTable.setPosition(x, y);
+
+        //realignMainTable();
     }
 
     private void realignMainTable() {
@@ -75,15 +83,16 @@ public class StartScreen extends GameScreen {
     public void render(float delta) {
         update(delta);
         draw();
+
         System.out.println( "X:" + rootTable.getX() + " Y:" + rootTable.getY() );
         System.out.println("Mouse X:" + Gdx.input.getX() + " Y:" + Gdx.input.getY()  );
     }
 
-    private void update(float delta){
+    protected void update(float delta){
         stage.act(delta);
     }
 
-    private void draw(){
+    protected void draw(){
         clearScreen();
         stage.draw();
     }
